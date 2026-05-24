@@ -1,0 +1,132 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap");
+@import "tailwindcss";
+
+@theme {
+  --color-desk: #111113;
+  --color-panel: #19191b;
+  --color-surface: #222225;
+}
+
+@layer base {
+  :root {
+    --accent: #9ca3af;
+    --bg-base: #111113;
+    --bg-card: #19191b;
+    --bg-elevated: #1e1e20;
+    --bg-surface: #222225;
+    --border: #2a2a2d;
+    --border-hover: #3a3a3d;
+    --text-primary: #ededef;
+    --text-secondary: #9ca3af;
+    --text-muted: #65656d;
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: "Inter", system-ui, -apple-system, sans-serif;
+    background: var(--bg-base);
+    color: var(--text-secondary);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    letter-spacing: -0.011em;
+  }
+  h1, h2, h3, h4 {
+    font-family: "Inter", system-ui, sans-serif;
+    color: var(--text-primary);
+  }
+  ::selection {
+    background: rgba(255,255,255,0.08);
+    color: var(--text-primary);
+  }
+
+  /* Force all slate/zinc backgrounds to dark palette */
+  [class*="bg-slate-9"], [class*="bg-slate-8"],
+  [class*="bg-zinc-9"], [class*="bg-zinc-8"] {
+    background-color: var(--bg-card) !important;
+  }
+  [class*="border-slate-"], [class*="border-zinc-7"], [class*="border-zinc-8"] {
+    border-color: var(--border) !important;
+  }
+  [class*="text-slate-2"], [class*="text-white"] {
+    color: var(--text-primary) !important;
+  }
+  [class*="text-slate-3"], [class*="text-slate-4"] {
+    color: var(--text-secondary) !important;
+  }
+  [class*="text-slate-5"], [class*="text-slate-6"], [class*="text-zinc-6"], [class*="text-zinc-7"] {
+    color: var(--text-muted) !important;
+  }
+  /* Colored text overrides — keep accent via inline styles */
+  [class*="text-emerald"], [class*="text-cyan"], [class*="text-violet"] {
+    color: var(--accent) !important;
+  }
+  /* Colored backgrounds that leaked — force dark */
+  [class*="bg-emerald"], [class*="bg-cyan"], [class*="bg-violet"],
+  [class*="bg-amber"], [class*="bg-rose"], [class*="bg-fuchsia"],
+  [class*="bg-orange"], [class*="bg-pink"], [class*="bg-blue"],
+  [class*="bg-green"], [class*="bg-red"], [class*="bg-yellow"] {
+    background-color: var(--bg-card) !important;
+  }
+  [class*="shadow-"] {
+    box-shadow: none !important;
+  }
+}
+
+@layer utilities {
+  .text-glow-cyan, .text-glow-violet, .text-glow-white { text-shadow: none; }
+  .ring-glow-cyan, .ring-glow-violet { box-shadow: none; }
+
+  .accent { color: var(--accent); }
+
+  .bg-grid {
+    background-image:
+      linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+    background-size: 100px 100px;
+  }
+  .bg-radial-violet { background: none; }
+
+  .rune-border {
+    position: relative;
+    border: 1px solid #2a2a2d;
+    background: #19191b;
+  }
+  .rune-border::before { display: none; }
+
+  .card {
+    border: 1px solid #2a2a2d;
+    background: #19191b;
+    border-radius: 12px;
+    transition: border-color 0.4s ease;
+  }
+  .card:hover { border-color: #3a3a3d; }
+
+  .gold-line { background: linear-gradient(90deg, transparent, rgba(255,255,255,0.06), transparent); height: 1px; }
+  .divider { height: 1px; background: #2a2a2d; }
+
+  @keyframes float-rune { 0%,100%{transform:translateY(0);opacity:.05}50%{transform:translateY(-4px);opacity:.1} }
+  .animate-rune { animation: float-rune 12s ease-in-out infinite; }
+  @keyframes pulse-mana { 0%,100%{opacity:.3}50%{opacity:.6} }
+  .animate-mana { animation: pulse-mana 5s ease-in-out infinite; }
+  @keyframes scan { 0%{transform:translateX(-100%)}100%{transform:translateX(100%)} }
+  .animate-scan { animation: scan 6s linear infinite; }
+
+  .system-scrollbar { scrollbar-width: thin; scrollbar-color: #2a2a2d transparent; }
+  .system-scrollbar::-webkit-scrollbar { width: 3px; }
+  .system-scrollbar::-webkit-scrollbar-track { background: transparent; }
+  .system-scrollbar::-webkit-scrollbar-thumb { background: #2a2a2d; border-radius: 999px; }
+
+  @media (prefers-reduced-motion:reduce) { .animate-rune,.animate-mana,.animate-scan{animation:none} }
+}
+
+/* ─── Lucide Icons – Global Rules ─── */
+svg[data-lucide],
+.lucide {
+  stroke: currentColor;
+  stroke-width: 1.5px;
+  fill: none;
+  width: 24px;
+  height: 24px;
+  display: inline-block;
+  vertical-align: middle;
+}
